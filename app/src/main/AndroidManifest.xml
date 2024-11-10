@@ -14,6 +14,28 @@
         android:theme="@style/Theme.User_module"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.AddQuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ViewQuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddEditQuestionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddEditQuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.QuizListActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".activity.ViewTestActivity"
             android:exported="false" />
         <activity
@@ -21,12 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.TestListActivity"
-            android:exported="true" >  <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.ViewCourseActivity"
             android:exported="false" />
@@ -35,9 +52,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.CourseListActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.ViewProgramActivity"
             android:exported="false" />
