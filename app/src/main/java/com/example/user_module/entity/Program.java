@@ -12,7 +12,10 @@ public class Program {
     private String name;
     private String description;
     private String type; // e.g., "Seminar", "Activity", "Hackathon"
-    private long date; // Store date as a timestamp for simplicity
+
+    // Start and end dates as timestamps for a date range
+    private long startDate;
+    private long endDate;
 
     // Getters and Setters
     public int getId() { return id; }
@@ -27,6 +30,11 @@ public class Program {
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
 
-    public long getDate() { return date; }
-    public void setDate(long date) { this.date = date; }
+    public long getStartDate() { return startDate; }
+    public void setStartDate(long startDate) { this.startDate = startDate; }
+
+    public long getEndDate() { return endDate; }
+    public void setEndDate(long endDate) { this.endDate = endDate; }
+
+
 }

@@ -3,6 +3,7 @@ package com.example.user_module.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CalendarView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.example.user_module.AppDatabase;
 import com.example.user_module.R;
 import com.example.user_module.entity.Program;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class ProgramListActivity extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class ProgramListActivity extends AppCompatActivity {
     private RecyclerView recyclerViewPrograms;
     private Button buttonAddProgram;
     private ProgramAdapter programAdapter;
+    private CalendarView calendarView;
 
     // Define ActivityResultLauncher for adding/editing programs
     private final ActivityResultLauncher<Intent> addEditProgramLauncher = registerForActivityResult(
@@ -38,9 +41,18 @@ public class ProgramListActivity extends AppCompatActivity {
 
         recyclerViewPrograms = findViewById(R.id.recyclerViewPrograms);
         buttonAddProgram = findViewById(R.id.buttonAddProgram);
+        calendarView = findViewById(R.id.calendarView);
 
         recyclerViewPrograms.setLayoutManager(new LinearLayoutManager(this));
-        loadPrograms();
+        loadPrograms(); // Initial load of all programs
+
+        // Set up CalendarView to filter programs by selected date
+        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            Calendar selectedDate = Calendar.getInstance();
+            selectedDate.set(year, month, dayOfMonth);
+            long selectedTimestamp = selectedDate.getTimeInMillis();
+            loadProgramsByDate(selectedTimestamp); // Load programs for the selected date
+        });
 
         buttonAddProgram.setOnClickListener(v -> {
             Intent intent = new Intent(this, AddEditProgramActivity.class);
@@ -57,6 +69,19 @@ public class ProgramListActivity extends AppCompatActivity {
                 recyclerViewPrograms.setAdapter(programAdapter);
             } else {
                 // Update the existing adapter data if already initialized
+                programAdapter.setProgramList(programs);
+                programAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void loadProgramsByDate(long date) {
+        AppDatabase db = AppDatabase.getInstance(this);
+        db.programDao().getProgramsByDate(date).observe(this, programs -> {
+            if (programAdapter == null) {
+                programAdapter = new ProgramAdapter(this, programs, addEditProgramLauncher);
+                recyclerViewPrograms.setAdapter(programAdapter);
+            } else {
                 programAdapter.setProgramList(programs);
                 programAdapter.notifyDataSetChanged();
             }

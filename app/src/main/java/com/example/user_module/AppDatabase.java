@@ -22,7 +22,7 @@ import com.example.user_module.entity.Quiz;
 import com.example.user_module.entity.Test;
 import com.example.user_module.entity.User;
 
-@Database(entities = {User.class, Forum.class, Post.class, Program.class, Course.class, Test.class, Quiz.class, Question.class}, version = 4)
+@Database(entities = {User.class, Forum.class, Post.class, Program.class, Course.class, Test.class, Quiz.class, Question.class}, version = 5)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 

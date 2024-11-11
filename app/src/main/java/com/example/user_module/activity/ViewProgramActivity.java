@@ -8,6 +8,10 @@ import com.example.user_module.AppDatabase;
 import com.example.user_module.R;
 import com.example.user_module.entity.Program;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class ViewProgramActivity extends AppCompatActivity {
 
     private TextView textViewName, textViewDescription, textViewType, textViewDate;
@@ -35,7 +39,13 @@ public class ViewProgramActivity extends AppCompatActivity {
                 textViewName.setText(program.getName());
                 textViewDescription.setText(program.getDescription());
                 textViewType.setText(program.getType());
-                textViewDate.setText(String.valueOf(program.getDate())); // Format date as needed
+
+                // Format and display start and end dates
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+                String formattedStartDate = dateFormat.format(new Date(program.getStartDate()));
+                String formattedEndDate = dateFormat.format(new Date(program.getEndDate()));
+
+                textViewDate.setText("Start: " + formattedStartDate + "\nEnd: " + formattedEndDate);
             }
         });
     }
