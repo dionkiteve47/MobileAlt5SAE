@@ -3,17 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/backgroundColor"
     android:padding="16dp">
 
+    <!-- Add Forum Button -->
     <Button
         android:id="@+id/buttonAddForum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Forum" />
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/primaryColor"
+        android:background="@drawable/button_background"
+        android:elevation="4dp"
+        android:text="Add Forum"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
+    <!-- Forums List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewForums"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="16dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/recycler_background"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        android:elevation="2dp" />
+
 </LinearLayout>

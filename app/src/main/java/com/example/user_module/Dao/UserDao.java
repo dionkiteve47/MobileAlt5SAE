@@ -1,15 +1,22 @@
 package com.example.user_module.Dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.user_module.entity.User;
+
+import java.util.List;
 
 @Dao
 public interface UserDao {
     @Insert
     void insert(User user);
+
+    @Update
+    void update(User user);
 
     @Query("SELECT COUNT(*) FROM user_table WHERE email = :email")
     int checkUserExists(String email);
@@ -27,5 +34,15 @@ public interface UserDao {
     @Query("UPDATE user_table SET password = :newPassword WHERE email = :email")
     void updatePassword(String email, String newPassword);
 
+    @Query("SELECT * FROM user_table WHERE resetToken = :resetToken LIMIT 1")
+    User getUserByResetToken(String resetToken); // Retrieve user by reset token
+
+    @Query("SELECT * FROM user_table")
+    List<User> getAllUsers();
+
+
+
+    @Delete
+    void delete(User user);
 
 }
